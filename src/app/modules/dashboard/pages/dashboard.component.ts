@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { SidenavComponent } from "../../shared/components/sidenav/sidenav.component";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: "app-dashboard",
   standalone: true,
-  imports: [],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  imports: [SidenavComponent],
+  templateUrl: "./dashboard.component.html",
+  styleUrl: "./dashboard.component.css",
 })
-export class DashboardComponent {
-
-}
+export class DashboardComponent {}
