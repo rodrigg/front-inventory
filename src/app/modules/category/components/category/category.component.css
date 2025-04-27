@@ -17,7 +17,7 @@ mat-form-field {
   width: 140%;
 }
 
-.nat-cell:nth-child(1),
+.mat-cell:nth-child(1),
 .mat-header-cell:nth-child(1) {
   flex: 0 0 6%;
 }

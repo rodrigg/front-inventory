@@ -13,11 +13,18 @@
     <div class="right">
       <ul>
         <li>
-          <button mat-raised-button color="primary">Agregar Categorías</button>
+          <button
+            (click)="openCategoryDialog()"
+            mat-raised-button
+            color="primary"
+          >
+            Agregar Categorías
+          </button>
         </li>
       </ul>
     </div>
   </mat-card-header>
+
   <mat-card-content
     ><table mat-table [dataSource]="dataSource" class="mat-cell">
       <ng-container matColumnDef="id">
@@ -39,7 +46,7 @@
             <mat-icon aria-label="Edit">edit</mat-icon>
           </button>
           <button mat-icon-button color="accent">
-            <mat-icon aria-label="Delete">dekete</mat-icon>
+            <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
         </td>
       </ng-container>

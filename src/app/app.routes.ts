@@ -7,4 +7,9 @@ export const routes: Routes = [
     path: "dashboard",
     loadChildren: () => import("./modules/dashboard/dashboard.routes"),
   },
+  {
+    component: DashboardComponent,
+    path: "",
+    loadChildren: () => import("./modules/dashboard/dashboard.routes"),
+  },
 ];
