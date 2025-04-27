@@ -34,7 +34,6 @@ export class CategoryComponent implements OnInit {
   getCategories(): void {
     this.categoryService.getCategories().subscribe(
       (data: any) => {
-        console.log("respuesta categories", data);
         this.processCategoryResponse(data);
       },
       (error) => {
@@ -55,7 +54,7 @@ export class CategoryComponent implements OnInit {
 
   openCategoryDialog() {
     const dialogRef = this.dialog.open(NewCategoryComponent, {
-      width: "450px",
+      width: "280px",
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
@@ -71,6 +70,22 @@ export class CategoryComponent implements OnInit {
     action: string
   ): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(messeage, action, { duration: 2000 });
+  }
+  edit(id: any, name: any, description: any) {
+    const dialogRef = this.dialog.open(NewCategoryComponent, {
+      data: { id, name, description },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        this.openSnackBar("Categoria actualizada", "Exitosa");
+        this.getCategories();
+      } else if (result === 2) {
+        this.openSnackBar(
+          "Se produjo un error al actualizar categoria",
+          "Error"
+        );
+      }
+    });
   }
 }
 
