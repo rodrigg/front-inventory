@@ -11,6 +11,7 @@ import {
   MatSnackBarRef,
   SimpleSnackBar,
 } from "@angular/material/snack-bar";
+import { ConfirmComponent } from "../../../shared/components/confirm/confirm.component";
 
 @Component({
   selector: "app-category",
@@ -74,6 +75,22 @@ export class CategoryComponent implements OnInit {
   edit(id: any, name: any, description: any) {
     const dialogRef = this.dialog.open(NewCategoryComponent, {
       data: { id, name, description },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        this.openSnackBar("Categoria actualizada", "Exitosa");
+        this.getCategories();
+      } else if (result === 2) {
+        this.openSnackBar(
+          "Se produjo un error al actualizar categoria",
+          "Error"
+        );
+      }
+    });
+  }
+  deleteCategory(id: any) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
