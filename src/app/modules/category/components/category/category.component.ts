@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, ViewChild } from "@angular/core";
 import { CategoryService } from "../../../shared/services/category.service";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { MaterialModule } from "../../../shared/material.module";
@@ -12,6 +12,7 @@ import {
   SimpleSnackBar,
 } from "@angular/material/snack-bar";
 import { ConfirmComponent } from "../../../shared/components/confirm/confirm.component";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: "app-category",
@@ -25,7 +26,8 @@ export class CategoryComponent implements OnInit {
   private categoryService = inject(CategoryService);
   public dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
-
+  @ViewChild(MatPaginator)
+  private paginator!: MatPaginator;
   ngOnInit(): void {
     this.getCategories();
   }
@@ -50,6 +52,7 @@ export class CategoryComponent implements OnInit {
         dataCategory.push(element);
       });
       this.dataSource = new MatTableDataSource(dataCategory);
+      this.dataSource.paginator = this.paginator;
     }
   }
 
@@ -103,6 +106,18 @@ export class CategoryComponent implements OnInit {
         );
       }
     });
+  }
+  buscar(termino: string) {
+    if (termino.length !== 0) {
+      this.categoryService.getCategoriesByiD(termino).subscribe(
+        (data: any) => {
+          this.processCategoryResponse(data);
+        },
+        (erro: any) => {
+          console.log("error", erro);
+        }
+      );
+    }
   }
 }
 
